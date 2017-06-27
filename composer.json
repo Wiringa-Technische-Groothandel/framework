@@ -1,0 +1,51 @@
+{
+  "name": "wtg/framework",
+  "description": "WTG Webshop framework.",
+  "keywords": ["framework", "wtg", "laravel", "webshop"],
+  "license": "MIT",
+  "type": "library",
+  "homepage": "https://wiringa.nl",
+  "authors": [
+    {
+      "name": "Thomas Wiringa",
+      "email": "thomas.wiringa@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "laravel/framework": "5.5.*"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "~1.4",
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "~6.0"
+  },
+  "replace": {
+    "wtg/theme": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "WTG\\": "src/WTG"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "WTG\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    },
+    "laravel": {
+      "providers": [
+        "WTG\\Theme\\ThemeServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
