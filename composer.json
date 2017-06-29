@@ -22,7 +22,8 @@
     "phpunit/phpunit": "~6.0"
   },
   "replace": {
-    "wtg/theme": "self.version"
+    "wtg/theme": "self.version",
+    "wtg/config": "self.version"
   },
   "autoload": {
     "psr-4": {
@@ -43,7 +44,8 @@
     },
     "laravel": {
       "providers": [
-        "WTG\\Theme\\ThemeServiceProvider"
+        "WTG\\Theme\\ThemeServiceProvider",
+        "WTG\\Config\\ConfigServiceProvider"
       ]
     }
   },
