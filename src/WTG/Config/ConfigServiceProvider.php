@@ -37,7 +37,7 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->app->bind('config', ConfigRepository::class);
+        $this->app->bind(ConfigLoaderInterface::class, ConfigLoader::class);
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace WTG\Config;
 
-use Doctrine\ORM\EntityManager;
 use WTG\Config\Entities\Config;
+use Doctrine\ORM\EntityManager;
+use Illuminate\Config\Repository;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Config loader.
@@ -11,7 +13,7 @@ use WTG\Config\Entities\Config;
  * @package     WTG\Config
  * @author      Thomas Wiringa  <thomas.wiinga@gmail.com>
  */
-class ConfigLoader
+class ConfigLoader implements ConfigLoaderInterface
 {
     /**
      * @var EntityManager
@@ -43,10 +45,9 @@ class ConfigLoader
      *
      * @return void
      */
-    protected function mergeDatabaseConfig()
+    public function mergeDatabaseConfig()
     {
-        $repository = $this->getEntityRepository();
-        $configItems = $repository->findAll();
+        $configItems = $this->getDatabaseItems();
         $config = $this->getConfigRepository();
 
         foreach ($configItems as $item) {
@@ -55,11 +56,23 @@ class ConfigLoader
     }
 
     /**
+     * Get the config items from the database.
+     *
+     * @return array
+     */
+    public function getDatabaseItems(): array
+    {
+        $repository = $this->getEntityRepository();
+
+        return $repository->findAll();
+    }
+
+    /**
      * Get the config entity repository.
      *
      * @return \Doctrine\ORM\EntityRepository
      */
-    protected function getEntityRepository()
+    public function getEntityRepository(): EntityRepository
     {
         return $this->em->getRepository(Config::class);
     }
@@ -69,7 +82,7 @@ class ConfigLoader
      *
      * @return \Illuminate\Config\Repository
      */
-    protected function getConfigRepository()
+    public function getConfigRepository(): Repository
     {
         return app('config');
     }
