@@ -19,11 +19,15 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Doctrine\DBAL\Types\Type::addType('uuid', 'Ramsey\Uuid\Doctrine\UuidType');
+
         $this->app->register(\LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 
         $this->commands([
             Console\StoreConfigCommand::class
         ]);
+
+        $this->loadDatabaseConfigValues();
     }
 
     /**
@@ -34,5 +38,18 @@ class ConfigServiceProvider extends ServiceProvider
     public function register()
     {
         //$this->app->bind('config', ConfigRepository::class);
+    }
+
+    /**
+     * Load config values from the database.
+     *
+     * @return void
+     */
+    protected function loadDatabaseConfigValues()
+    {
+        /** @var ConfigLoader $configLoader */
+        $configLoader = $this->app->make(ConfigLoader::class);
+
+        $configLoader->load();
     }
 }

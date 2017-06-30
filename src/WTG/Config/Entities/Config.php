@@ -3,6 +3,7 @@
 namespace WTG\Config\Entities;
 
 use Carbon\Carbon;
+use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -18,10 +19,11 @@ class Config
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="id")
+     * @ORM\Column(type="uuid")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    protected $i;
+    protected $id;
 
     /**
      * @ORM\Column(name="`key`", type="string", length=255, unique=true)
@@ -60,9 +62,9 @@ class Config
     }
 
     /**
-     * @return string
+     * @return \Ramsey\Uuid\Uuid
      */
-    public function getId(): string
+    public function getId(): Uuid
     {
         return $this->id;
     }

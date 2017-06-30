@@ -3,8 +3,8 @@
 namespace WTG\Config\Console;
 
 use Illuminate\Console\Command;
-use Doctrine\ORM\EntityManagerInterface;
 use WTG\Config\Entities\Config;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Store config command.
@@ -18,12 +18,12 @@ class StoreConfigCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'config:store {--f|force : Overwrite existing settings}';
+    protected $signature = 'config:store {key : Config key} {value : String value} {--f|force : Overwrite existing settings}';
 
     /**
      * @var string
      */
-    protected $description = 'Store values from config files in the database';
+    protected $description = 'Store config values in the database';
 
     /**
      * @var EntityManagerInterface
@@ -49,19 +49,17 @@ class StoreConfigCommand extends Command
      */
     public function handle()
     {
-        $config = array_dot(config()->all());
+        $key = $this->argument('key');
+        $value = $this->argument('value');
 
-        foreach ($config as $key => $value) {
-            $configItem = new Config(
-                $key,
-                $value
-            );
+        $configItem = new Config(
+            $key,
+            $value
+        );
 
-            $this->em->persist($configItem);
-        }
-
+        $this->em->persist($configItem);
         $this->em->flush();
 
-        $this->output->success('Cant touch this!');
+        $this->output->success("Config value '$key' set!");
     }
 }

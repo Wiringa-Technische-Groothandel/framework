@@ -18,7 +18,8 @@
   "require": {
     "php": ">=7.0",
     "illuminate/console": "5.4.*|5.5.*",
-    "illuminate/support": "5.4.*|5.5.*"
+    "illuminate/support": "5.4.*|5.5.*",
+    "ramsey/uuid-doctrine": "dev-master"
   },
   "config": {
     "sort-packages": true
