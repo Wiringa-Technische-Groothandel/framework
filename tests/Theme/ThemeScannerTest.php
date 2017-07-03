@@ -2,7 +2,9 @@
 
 namespace WTG\Tests\Theme;
 
+use Illuminate\Support\Collection;
 use Mockery as m;
+use WTG\Theme\Metadata;
 use WTG\Theme\ThemeScanner;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
@@ -109,6 +111,18 @@ class ThemeScannerTest extends TestCase
         $scanner = new ThemeScanner($fs);
 
         $scanner->parseMetadata('./foobar');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function returnsThemeMetadataCollection()
+    {
+        $scanner = app()->make(ThemeScanner::class);
+        $themes = $scanner->scan();
+
+        $this->assertInstanceOf(Collection::class, $themes);
     }
 
     /**
