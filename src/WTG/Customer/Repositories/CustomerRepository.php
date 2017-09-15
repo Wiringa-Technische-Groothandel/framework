@@ -15,7 +15,7 @@ use WTG\Customer\Entities\Customer;
 interface CustomerRepository
 {
     /**
-     * Find a block by its customer_number.
+     * Find a customer by its username.
      *
      * @param  string  $username
      * @return Customer|null

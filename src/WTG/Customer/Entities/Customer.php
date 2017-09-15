@@ -4,9 +4,12 @@ namespace WTG\Customer\Entities;
 
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use WTG\Support\Concerns\Timestamps;
+use WTG\Support\Contracts\Timestampable;
 use LaravelDoctrine\ACL\Mappings as ACL;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Doctrine\Common\Collections\ArrayCollection;
 use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
 
 /**
@@ -18,7 +21,7 @@ use LaravelDoctrine\ORM\Auth\Authenticatable as AuthenticatableTrait;
  * @subpackage  Entities
  * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
  */
-class Customer implements Authenticatable
+class Customer implements Authenticatable, Timestampable
 {
     use Timestamps,
         AuthenticatableTrait;
@@ -41,6 +44,12 @@ class Customer implements Authenticatable
      * @var Company
      */
     protected $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WTG\Favorite\Entities\Favorite")
+     * @var PersistentCollection
+     */
+    protected $favorites;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -100,6 +109,14 @@ class Customer implements Authenticatable
     public function getCompany(): Company
     {
         return $this->company;
+    }
+
+    /**
+     * @return PersistentCollection
+     */
+    public function getFavorites(): PersistentCollection
+    {
+        return $this->favorites;
     }
 
     /**

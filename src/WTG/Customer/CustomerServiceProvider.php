@@ -40,7 +40,6 @@ class CustomerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(AclServiceProvider::class);
-        $this->app->register(DoctrineServiceProvider::class);
 
         if (!Type::hasType('uuid')) {
             Type::addType('uuid', 'Ramsey\Uuid\Doctrine\UuidType');

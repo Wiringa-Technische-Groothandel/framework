@@ -2,11 +2,12 @@
 
 namespace WTG;
 
-use WTG\Support\Stub;
 use WTG\Auth\AuthServiceProvider;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use WTG\Catalog\CatalogServiceProvider;
+use WTG\Checkout\CheckoutServiceProvider;
 use WTG\Customer\CustomerServiceProvider;
+use WTG\Favorite\FavoriteServiceProvider;
 use WTG\ContentManager\ContentManagerServiceProvider;
 
 /**
@@ -18,8 +19,6 @@ use WTG\ContentManager\ContentManagerServiceProvider;
  */
 class FrameworkServiceProvider extends ServiceProvider
 {
-    protected $quote;
-
     /**
      * Boot the provider.
      *
@@ -27,19 +26,11 @@ class FrameworkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // TODO: Remove this from here
-        View::composer('*', function ($view) {
-            if (auth()->check()) {
-                if ($this->quote === null) {
-                    $this->quote = new Stub();
-                }
-
-                $view->with('quote', $this->quote);
-            }
-        });
-
-        $this->app->register(CustomerServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
+        $this->app->register(CatalogServiceProvider::class);
+        $this->app->register(CheckoutServiceProvider::class);
         $this->app->register(ContentManagerServiceProvider::class);
+        $this->app->register(CustomerServiceProvider::class);
+        $this->app->register(FavoriteServiceProvider::class);
     }
 }

@@ -15,7 +15,7 @@ use WTG\Customer\Entities\Company;
 class DoctrineCompanyRepository extends EntityRepository implements CompanyRepository
 {
     /**
-     * Find a block by its customer_number.
+     * Find a company by its customer_number.
      *
      * @param  string  $customerNumber
      * @return Company|null

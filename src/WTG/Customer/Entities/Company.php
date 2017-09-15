@@ -5,6 +5,7 @@ namespace WTG\Customer\Entities;
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use WTG\Support\Concerns\Timestamps;
+use WTG\Support\Contracts\Timestampable;
 use LaravelDoctrine\ACL\Contracts\Organisation;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -17,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @subpackage  Entities
  * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
  */
-class Company implements Organisation
+class Company implements Organisation, Timestampable
 {
     use Timestamps;
 

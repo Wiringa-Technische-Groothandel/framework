@@ -14,7 +14,7 @@ use WTG\Customer\Entities\Company;
 interface CompanyRepository
 {
     /**
-     * Find a block by its customer_number.
+     * Find a company by its customer_number.
      *
      * @param  string  $customerNumber
      * @return Company|null

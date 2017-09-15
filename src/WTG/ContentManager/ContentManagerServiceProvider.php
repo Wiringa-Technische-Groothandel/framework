@@ -24,11 +24,15 @@ class ContentManagerServiceProvider extends ServiceProvider
      */
     protected $blockRepository;
 
+    /**
+     * @var bool
+     */
     protected $defer = true;
 
     /**
      * Boot the service provider.
      *
+     * @param  BlockRepository  $blockRepository
      * @return void
      */
     public function boot(BlockRepository $blockRepository)
